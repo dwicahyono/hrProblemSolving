@@ -1,0 +1,25 @@
+<?php
+
+/*
+ * Complete the 'timeConversion' function below.
+ *
+ * The function is expected to return a STRING.
+ * The function accepts STRING s as parameter.
+ */
+$s = "07:45:01PM";
+function timeConversion($s) {
+    // Write your code here
+    $dateTimeVal = DateTime::createFromFormat('h:i:sA', $s)->format('H:i:s');
+    
+    return $dateTimeVal;
+}
+
+$fptr = fopen(getenv("OUTPUT_PATH"), "w");
+
+$s = rtrim(fgets(STDIN), "\r\n");
+
+$result = timeConversion($s);
+
+fwrite($fptr, $result . "\n");
+
+fclose($fptr);
