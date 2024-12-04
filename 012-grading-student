@@ -1,0 +1,54 @@
+<?php
+
+/*
+ * Complete the 'gradingStudents' function below.
+ *
+ * The function is expected to return an INTEGER_ARRAY.
+ * The function accepts INTEGER_ARRAY grades as parameter.
+ */
+$grades = [4, 73, 67, 38, 33];
+
+function gradingStudents($grades) {
+    // Write your code here
+
+    $n = count($grades);
+    $result = [];
+    
+    for($i=0;$i<$n;$i++){
+        
+        //cari angka diatasnya kelipatan 5
+        $t = ceil($grades[$i] / 5) * 5;
+        
+        
+        // jika grade diatas 38 dan selisih kurang dari 3 
+        // bulatkan ke kelipatan 5 lalu masukkan dalam array result
+        
+        if($grades[$i] >= 38 && ($t - $grades[$i]) < 3){
+            $result[]= $t;    
+        } else {
+            $result[]= $grades[$i];  
+        }
+            
+        
+    }
+
+    return $result;
+
+}
+
+$fptr = fopen(getenv("OUTPUT_PATH"), "w");
+
+$grades_count = intval(trim(fgets(STDIN)));
+
+$grades = array();
+
+for ($i = 0; $i < $grades_count; $i++) {
+    $grades_item = intval(trim(fgets(STDIN)));
+    $grades[] = $grades_item;
+}
+
+$result = gradingStudents($grades);
+
+fwrite($fptr, implode("\n", $result) . "\n");
+
+fclose($fptr);
