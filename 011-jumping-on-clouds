@@ -1,0 +1,59 @@
+<?php
+
+/*
+ * Complete the 'jumpingOnClouds' function below.
+ *
+ * The function is expected to return an INTEGER.
+ * The function accepts INTEGER_ARRAY c as parameter.
+ */
+$c = [0, 0, 1, 1, 0, 0];
+function jumpingOnClouds($c) {
+    // Write your code here
+
+    $result = [];
+$n = count($c);
+$i = 0;
+
+while ($i < $n) {
+    
+    //jika array 0 valid simpan dulu key nya
+    if ($c[$i] === 0) {
+        
+        $result[] = $i;
+        
+        // cek 2 langkah jika valid langunsg lompat
+        if ($i + 2 < $n && $c[$i + 2] === 0) {
+            $i+=2;   
+        } 
+        //cek 1 langkah
+        elseif ($i + 1 < $n && $c[$i + 1] === 0) {
+             $i++; // Jump 2 steps if valid
+         } 
+        else {
+            break; // Exit if no valid jumps are available
+        }
+    } else {
+        $i++; // Increment by 1 if the value is 1
+    }
+}
+
+    return count($result)-1;
+                
+    }
+    
+    
+
+
+$fptr = fopen(getenv("OUTPUT_PATH"), "w");
+
+$n = intval(trim(fgets(STDIN)));
+
+$c_temp = rtrim(fgets(STDIN));
+
+$c = array_map('intval', preg_split('/ /', $c_temp, -1, PREG_SPLIT_NO_EMPTY));
+
+$result = jumpingOnClouds($c);
+
+fwrite($fptr, $result . "\n");
+
+fclose($fptr);
