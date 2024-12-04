@@ -1,0 +1,62 @@
+<?php
+
+/*
+ * Complete the 'kangaroo' function below.
+ *
+ * The function is expected to return a STRING.
+ * The function accepts following parameters:
+ *  1. INTEGER x1
+ *  2. INTEGER v1
+ *  3. INTEGER x2
+ *  4. INTEGER v2
+ */
+//posisi kanguru1 dan kanguru2
+$x1 = 2;
+$x2 = 1;
+//jarak lompat kanguru1 dan kanguru2
+$v1 = 1;
+$v2 = 2;
+
+function kangaroo($x1, $v1, $x2, $v2) {
+    // Write your code here
+    
+    /*diasumsikan kanguru 1 dan 2 melakukan step lompatan yg sama.    
+        Dan karena tidak ada batasan berapa kali lompat, 
+        maka harus ditetapkan sesuai jarak terjauh adalah 10000.
+        Hasil akan ditetapkan NO sampai ditemukan kesamaan posisi YES */
+        
+    $result = "NO";
+    
+    for($i=0;$i<=10000;$i++){
+        //hitung lompatan keduanya, jika ditemukan sama keluar dari loop 
+        $x1 = $x1 + $v1;
+        $x2 = $x2 + $v2;
+        
+        if ($x1 == $x2){ 
+            $result = "YES";
+            break; 
+            }
+        
+    }
+    
+    return $result;
+    
+}
+
+$fptr = fopen(getenv("OUTPUT_PATH"), "w");
+
+$first_multiple_input = explode(' ', rtrim(fgets(STDIN)));
+
+$x1 = intval($first_multiple_input[0]);
+
+$v1 = intval($first_multiple_input[1]);
+
+$x2 = intval($first_multiple_input[2]);
+
+$v2 = intval($first_multiple_input[3]);
+
+$result = kangaroo($x1, $v1, $x2, $v2);
+
+fwrite($fptr, $result . "\n");
+
+fclose($fptr);
