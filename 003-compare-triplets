@@ -1,0 +1,44 @@
+<?php
+
+/*
+ * Complete the 'compareTriplets' function below.
+ *
+ * The function is expected to return an INTEGER_ARRAY.
+ * The function accepts following parameters:
+ *  1. INTEGER_ARRAY a
+ *  2. INTEGER_ARRAY b
+ */
+$a = [1,2,3];
+$b=[3,2,1];
+function compareTriplets($a, $b) {
+    $n = count($a);
+    
+    $aa=0; 
+    $bb=0;
+    for($i = 0; $i < $n; $i++){
+        if($a[$i] <= 100 && $b[$i] <= 100){
+            if($a[$i] > $b[$i]) {$aa = $aa+1;}
+            if($a[$i] < $b[$i]) {$bb = $bb+1;}
+        }
+    }
+    
+    return [$aa,$bb];
+    
+    
+}
+
+$fptr = fopen(getenv("OUTPUT_PATH"), "w");
+
+$a_temp = rtrim(fgets(STDIN));
+
+$a = array_map('intval', preg_split('/ /', $a_temp, -1, PREG_SPLIT_NO_EMPTY));
+
+$b_temp = rtrim(fgets(STDIN));
+
+$b = array_map('intval', preg_split('/ /', $b_temp, -1, PREG_SPLIT_NO_EMPTY));
+
+$result = compareTriplets($a, $b);
+
+fwrite($fptr, implode(" ", $result) . "\n");
+
+fclose($fptr);
